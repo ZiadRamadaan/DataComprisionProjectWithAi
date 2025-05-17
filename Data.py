@@ -77,7 +77,7 @@ class ShannonFanoSearchModel:
             self.data, self.keywords = pickle.loads(f.read())
 
 # Streamlit UI
-st.set_page_config(page_title="Smart Assistant (Shannon-Fano)", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="Smart Assistant (Shannon-Fano)", layout="wide")
 st.markdown("""
     <style>
         .stButton>button {background-color: #4CAF50; color: white; font-weight: bold; border-radius: 8px;}
@@ -122,7 +122,7 @@ if st.session_state.model_ready:
         st.session_state.chat = []
 
     with st.form(key='chat_form', clear_on_submit=True):
-        prompt = st.text_input("📝 Enter a keyword or topic:")
+        prompt = st.text_input("Enter a keyword or topic:")
         submit_button = st.form_submit_button("Send")
 
     if submit_button and prompt:
