@@ -1,6 +1,1 @@
-"# ComplaintssystemForStudents" 
-"# ComplaintsSystemForStudents" 
-"# DataComprisionProjectWithAi" 
-"# DataComprisionProjectWithAi" 
-"# DataComprisionProjectWithAi" 
-"# DataComprisionProjectWithAi" 
+ "# DataComprisionProjectWithAi" 
