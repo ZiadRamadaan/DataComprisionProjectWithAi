@@ -65,7 +65,7 @@ class ShannonFanoSearchModel:
                         matching_sentences.append(cleaned)
 
         unique_sentences = list(dict.fromkeys(matching_sentences))
-        return unique_sentences[:max_points] if unique_sentences else ["❌ No relevant points found."]
+        return unique_sentences[:max_points] if unique_sentences else ["No relevant points found."]
 
     def save(self, filename="chat_data.pbz2"):
         data = pickle.dumps((self.data, self.keywords))
@@ -86,7 +86,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🤖 Smart Text Assistant using Shannon-Fano")
+st.title("Smart Text Assistant using Shannon-Fano")
 
 model_path = "chat_data.pbz2"
 
@@ -97,33 +97,33 @@ if "model" not in st.session_state:
     st.session_state.model = ShannonFanoSearchModel()
 
 # Upload and train section
-st.subheader("📄 Upload and Train on a Text File")
+st.subheader("Upload and Train on a Text File")
 file = st.file_uploader("Upload a .txt file", type="txt")
 
 if file:
     text = file.read().decode("utf-8")
-    st.text_area("📘 Text Preview:", text[:1000], height=150)
-    if st.button("✅ Train Model"):
+    st.text_area("Text Preview:", text[:1000], height=150)
+    if st.button("Train Model"):
         st.session_state.model.train(text)
         st.session_state.model.save(model_path)
         st.session_state.model_ready = True
-        st.success("✅ Model trained and data saved successfully.")
+        st.success("Model trained and data saved successfully.")
 elif os.path.exists(model_path) and not st.session_state.model_ready:
     try:
         st.session_state.model.load(model_path)
         st.session_state.model_ready = True
     except Exception as e:
-        st.error(f"❌ Error loading existing data: {e}")
+        st.error(f"Error loading existing data: {e}")
 
 # Chat interface
-st.subheader("💬 Ask Your Assistant")
+st.subheader("Ask Your Assistant")
 if st.session_state.model_ready:
     if "chat" not in st.session_state:
         st.session_state.chat = []
 
     with st.form(key='chat_form', clear_on_submit=True):
         prompt = st.text_input("📝 Enter a keyword or topic:")
-        submit_button = st.form_submit_button("✉ Send")
+        submit_button = st.form_submit_button("Send")
 
     if submit_button and prompt:
         responses = st.session_state.model.generate(prompt)
@@ -138,4 +138,4 @@ if st.session_state.model_ready:
             unsafe_allow_html=True
         )
 else:
-    st.info("⬆ Please upload and train the model using a text file first.")
+    st.info("Please upload and train the model using a text file first.")
